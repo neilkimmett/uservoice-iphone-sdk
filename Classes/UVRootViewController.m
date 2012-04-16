@@ -49,7 +49,7 @@
             [[[[UIAlertView alloc] initWithTitle:NSLocalizedStringFromTable(@"Error", @"UserVoice", nil)
                                          message:NSLocalizedStringFromTable(@"This application didn't configure UserVoice properly", @"UserVoice", nil)
                                         delegate:self
-                               cancelButtonTitle:nil
+                               cancelButtonTitle:nil 
                                otherButtonTitles:NSLocalizedStringFromTable(@"OK", @"UserVoice", nil), nil] autorelease] show];
 		}
 	} else {
@@ -67,12 +67,14 @@
         if (self.viewToLoad == @"welcome") {
             self.navigationController.navigationBarHidden = NO;
             UVWelcomeViewController *welcomeView = [[UVWelcomeViewController alloc] init];
+            welcomeView.navigationItem.leftBarButtonItem = self.navigationItem.leftBarButtonItem;
             [self.navigationController pushViewController:welcomeView animated:YES];
             [welcomeView release];
         } else if (self.viewToLoad == @"suggestions") {
             self.navigationController.navigationBarHidden = NO;
             UIViewController *welcomeViewController = [[[UVWelcomeViewController alloc] init] autorelease];
             UIViewController *suggestionListViewController = [[[UVSuggestionListViewController alloc] initWithForum:[UVSession currentSession].clientConfig.forum] autorelease];
+            welcomeViewController.navigationItem.leftBarButtonItem = self.navigationItem.leftBarButtonItem;
             NSArray *viewControllers = [NSArray arrayWithObjects:welcomeViewController, suggestionListViewController, nil];
             [self.navigationController setViewControllers:viewControllers animated:YES];
         } else if (self.viewToLoad == @"new_ticket") {
@@ -139,11 +141,11 @@
 // Implement loadView to create a view hierarchy programmatically, without using a nib.
 - (void)loadView {
 	// Hide the nav bar
-	self.navigationController.navigationBarHidden = YES;
+	//self.navigationController.navigationBarHidden = YES;
 
 	[super loadView];
 	
-	CGRect frame = [self contentFrameWithNavBar:NO];
+	CGRect frame = [self contentFrameWithNavBar:YES];
 	UIView *contentView = [[UIView alloc] initWithFrame:frame];
 	CGFloat screenWidth = [UVClientConfig getScreenWidth];
 	CGFloat screenHeight = [UVClientConfig getScreenHeight];

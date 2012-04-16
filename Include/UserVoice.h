@@ -17,6 +17,8 @@
 // Modally present the UserVoice interface
 + (void)presentUserVoiceInterfaceForParentViewController:(UIViewController *)parentViewController andConfig:(UVConfig *)config;
 
+// Return a navigation controller for presentation of the UserVoice interface
++ (UINavigationController *)navigationControllerForUserVoiceInterfaceWithConfig:(UVConfig *)config leftBarButtonItem:(UIBarButtonItem *)barButton;
 // Modally present the UserVoice contact form
 + (void)presentUserVoiceContactUsFormForParentViewController:(UIViewController *)parentViewController andConfig:(UVConfig *)config;
 
